@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Srulik & Lally</title>
+</head>
+<h1>Srulik & Lally Wedding</h1>
+
+<body onload="mystart()">
+    <div id="q"></div>
+    <div id="whats">
+        <div class="what" style="padding-left: 10%;">ימים</div>
+        <div class="what">שעות</div>
+        <div class="what">דקות</div>
+        <div class="what" style="padding-right: 2%;">שניות</div>
+    </div>
+</body>
+
+<style>
+    h1 {
+        font-family: Brush Script MT;
+        font-size: 10vw;
+        text-align: center;
+        color: #000000;
+        animation: neon 1.5s ease-in-out infinite alternate;
+        margin-bottom: 3%;
+    }
+
+    #whats {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .what {
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 4vw;
+        text-align: center;
+        animation: 1.5s ease-in-out infinite alternate;
+    }
+
+    body {
+        background-color: black;
+        color: #fff;
+    }
+
+
+    #q {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 14vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: 1.5s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes neon {
+        from {
+            text-shadow: 0 0 10px #e100ff, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000,
+                0 0 70px #000000, 0 0 80px #000000, 0 0 100px #000000, 0 0 150px #000000;
+        }
+
+        to {
+            text-shadow: 0 0 10px #ff0080, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000,
+                0 0 70px #000000, 0 0 80px #000000, 0 0 100px #000000, 0 0 150px #000000;
+        }
+    }
+</style>
+
+<script>
+    var dt2 = new Date('2024-07-09 19:00:00');
+    function My_date() {
+        var dt1 = new Date();
+        var delta = dt2 - dt1;
+        var diffDays = Math.floor(delta / (1000 * 60 * 60 * 24));
+        if (diffDays < 10) {
+            diffDays = "0" + diffDays.toString();
+        }
+        var diffhurs;
+        if (dt1.getHours() > dt2.getHours()) {
+            diffhurs = dt1.getHours() + dt2.getHours() - 24;
+        } else {
+            diffhurs = dt2.getHours() - dt1.getHours();
+        }
+        if (diffhurs < 10) {
+            diffhurs = "0" + Math.floor(diffhurs).toString();
+        }
+        var diffminutes = 59 - dt1.getMinutes();
+        if (diffminutes < 10) {
+            diffminutes = "0" + Math.floor(diffminutes).toString();
+        }
+        var diffSeconds = 59 - dt1.getSeconds();
+        if (diffSeconds < 10) {
+            diffSeconds = "0" + Math.floor(diffSeconds).toString();
+        }
+        var value = diffDays + ":" + diffhurs + ":" + diffminutes + ":" + diffSeconds;
+        document.getElementById("q").innerHTML = value;
+    }
+    var s;
+    function mystart() {
+        s = setInterval(My_date, 1000);
+    }
+</script>
+
+</html>
