@@ -7,7 +7,7 @@
 <h1>Srulik & Lally Wedding</h1>
 
 <body onload="mystart()">
-    <div id="q"></div>
+    <div id="time"></div>
     <div id="whats">
         <div class="what" style="padding-left: 10%;">ימים</div>
         <div class="what">שעות</div>
@@ -33,7 +33,7 @@
     }
 
     .what {
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-size: 4vw;
         text-align: center;
         animation: 1.5s ease-in-out infinite alternate;
@@ -45,7 +45,7 @@
     }
 
 
-    #q {
+    #time {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 14vw;
         display: flex;
@@ -70,32 +70,34 @@
 
 <script>
     var dt2 = new Date('2024-07-09 19:00:00');
+    var dt1, delta, diffDays, diffHours, diffMinutes, diffSeconds;
     function My_date() {
-        var dt1 = new Date();
-        var delta = dt2 - dt1;
-        var diffDays = Math.floor(delta / (1000 * 60 * 60 * 24));
+        dt1 = new Date();
+        delta = dt2 - dt1;
+        diffDays = Math.floor(delta / (1000 * 60 * 60 * 24));
+        if (dt1.getHours() > dt2.getHours())
+            diffHours = Math.abs(23 - (dt1.getHours() - dt2.getHours()));
+        if (dt1.getHours() < dt2.getHours())
+            diffHours = Math.abs(dt2.getHours() - dt1.getHours()) - 1;
+        if (dt1.getHours() == dt2.getHours()) {
+            diffHours = 23;
+            diffDays--;
+        }
         if (diffDays < 10) {
             diffDays = "0" + diffDays.toString();
         }
-        var diffhurs;
-        if (dt1.getHours() > dt2.getHours()) {
-            diffhurs = dt1.getHours() + dt2.getHours() - 24;
-        } else {
-            diffhurs = dt2.getHours() - dt1.getHours();
+        if (diffHours < 10) {
+            diffHours = "0" + diffHours.toString();
         }
-        if (diffhurs < 10) {
-            diffhurs = "0" + Math.floor(diffhurs).toString();
+        diffMinutes = 59 - dt1.getMinutes();
+        if (diffMinutes < 10) {
+            diffMinutes = "0" + diffMinutes.toString();
         }
-        var diffminutes = 59 - dt1.getMinutes();
-        if (diffminutes < 10) {
-            diffminutes = "0" + Math.floor(diffminutes).toString();
-        }
-        var diffSeconds = 59 - dt1.getSeconds();
+        diffSeconds = 59 - dt1.getSeconds();
         if (diffSeconds < 10) {
-            diffSeconds = "0" + Math.floor(diffSeconds).toString();
+            diffSeconds = "0" + diffSeconds.toString();
         }
-        var value = diffDays + ":" + diffhurs + ":" + diffminutes + ":" + diffSeconds;
-        document.getElementById("q").innerHTML = value;
+        document.getElementById("time").innerHTML = diffDays + ':' + diffHours + ':' + diffMinutes + ':' + diffSeconds;
     }
     var s;
     function mystart() {
