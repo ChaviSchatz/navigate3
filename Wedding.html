@@ -74,14 +74,14 @@
     function My_date() {
         dt1 = new Date();
         delta = dt2 - dt1;
+        console.log(delta)
         diffDays = Math.floor(delta / (1000 * 60 * 60 * 24));
-        if (dt1.getHours() > dt2.getHours())
+        if (dt1.getHours() > dt2.getHours()) {
             diffHours = Math.abs(23 - (dt1.getHours() - dt2.getHours()));
-        if (dt1.getHours() < dt2.getHours())
+        } else if (dt1.getHours() < dt2.getHours())
             diffHours = Math.abs(dt2.getHours() - dt1.getHours()) - 1;
-        if (dt1.getHours() == dt2.getHours()) {
+        else {
             diffHours = 23;
-            diffDays--;
         }
         if (diffDays < 10) {
             diffDays = "0" + diffDays.toString();
